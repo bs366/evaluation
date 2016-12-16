@@ -1,0 +1,15 @@
+<template name="defaultLoggedOut">
+	{{#unless isSplash}}
+	<div class="valign-wrapper valign-helper-logged-out">
+		<div class="container valign">
+		<div class="row">
+			<div class="col offset-s3 s6 white z-depth-1 inner-padding">
+				{{> Template.dynamic template=yield}}
+			</div>
+		</div>
+		</div>
+	</div>
+	{{else}}
+		{{> Template.dynamic template=yield}}
+	{{/unless}}
+</template>

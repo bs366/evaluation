@@ -1,0 +1,45 @@
+<template name="dashboard">
+  {{#if Template.subscriptionsReady}}
+    <div class="animate-this">
+    <div class="project-desc-space">
+        <h3>{{unit.name}}</h3>
+        <div class="row">
+            <!-- <div class="col s7">
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+            </div> -->
+            <!-- <div class="col s5">
+                <p>Maybe we can add tags or something to projects?</p>
+                <div class="chip">Front End</div>
+                <div class="chip">Database Design</div>
+                <div class="chip">Conflicting Tags</div>
+            </div> -->
+        </div>
+        {{> adminViewTabs}}
+    </div>
+    <div class="dynamic-space">
+        <div class="container">
+            <div id="adminTab1" class="col s12">
+                {{> projectList}}
+            </div>
+            <div id="adminTab2" class="col s12">
+                {{#with unit}}
+                    {{> membersList}}
+                {{/with}}
+            </div>
+            <div id="adminTab3" class="col s12">
+                {{#with unit}}
+                    {{> unitSettings}}
+                {{/with}}
+            </div>
+            <!-- <div id="adminTab4" class="col s12">Test 4</div> -->
+        </div>
+    </div>
+    <ul id='dropdown1' class='dropdown-content options-dropdown'>
+        <li><a href="#!">Delete</a></li>
+        <li><a href="#!">two</a></li>
+    </ul>
+    </div>
+  {{else}}
+    {{> loading}}
+  {{/if}}
+</template>

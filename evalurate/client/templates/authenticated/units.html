@@ -1,0 +1,81 @@
+<template name="units">
+	{{#if myUnits}}
+	<div class="container">
+		<h3>Choose an organization</h3>
+		{{#each myUnits}}
+		<p>
+    		<button class="btn-large waves-effect waves-light root-choice" value="{{_id}}">
+        		{{name}}
+    		</button>
+		</p>
+		{{/each}}
+	</div>
+	{{/if}}
+</template>
+
+<template name="rootChooser">
+	<div class="container white z-depth-1 inner-padding">
+		{{> units}}
+		<hr>
+		{{> addRootUnit}}
+	</div>
+</template>
+
+<template name="addRootUnit">
+	<div class="container">
+		<h3>..Or create a new one</h3>
+		{{> quickForm collection="Units" id="insertRootUnitForm" type="insert" fields="name"}}
+	</div>
+</template>
+
+<template name="addChildUnit">
+	<div class="container">
+		<h1>Add a Child Unit</h1>
+		{{> quickForm collection="Units" id="insertChildUnitForm" type="insert" fields="name"}}
+	</div>
+</template>
+
+<template name="addProject">
+	{{> quickForm collection="Projects" id="insertProjectForm" type="insert"
+	omitFields="owner, parent"}}
+</template>
+
+<template name="unitView">
+	{{> inviteUser}}
+	{{> addChildUnit}}
+	{{#with unit}}
+		<h1>{{name}}</h1>
+
+		{{# if members }}<h2>Members: </h2>{{/if}}
+		{{#each members}}
+			<p>{{#with nameFromId this}}
+			{{firstName}} {{lastName}}
+			{{/with}}</p>
+		{{/each}}
+		{{> addProject}}
+		{{#if children}}<h2>Children: </h2>{{/if}}
+		{{#each children}}
+			<p>{{#with unitFromId this}}
+			<a href="{{pathFor 'unitView'}}/{{_id}}"><b>{{name}}</b></a>
+			{{/with}}</p>
+		{{/each}}
+
+		{{#if adminPerm}}
+			{{>unitPermissionSettings}}
+		{{/if}}
+	{{/with}}
+</template>
+
+<template name="inviteUser">
+	<form id="invite-user">
+		<label for="invite-by-email">Invite a user by Email</label>
+		<input type="text" placeholder="Email" id="invite-by-email" name="email">
+		<input type="submit" class="btn-large">
+	</form>
+</template>
+
+<template name="unitPermissionSettings">
+		<div class="row">
+			{{> quickForm collection="Units" id="updateUnitPermissions" type="update" fields="adminPerm, superAdminPerm" doc=this}}
+		</div>
+</template>

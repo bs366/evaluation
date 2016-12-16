@@ -1,0 +1,23 @@
+<template name="userProfileEdit">
+<div class="container">
+  <div class="row">
+    <div class="col m8 offset-m2 innder-padding white z-depth-2">
+        <h3>Complete the Registration Process Below</h3>
+        {{#autoForm id="userProfileEdit" schema=editProfileSchema collection="Meteor.users" doc=currentUser type="update"}}
+                <div class="row" style="margin-bottom: 0">
+                        <div class="col s6">{{> afQuickField name="profile.firstName"}}</div>
+                        <div class="col s6">{{> afQuickField name="profile.lastName"}}</div>
+                </div>                {{> afQuickField name="profile.phone"}}
+                {{> afQuickField name="profile.jobTitle"}}
+                {{> afQuickField name="profile.birthday"}}
+                {{> afQuickField name="profile.bio" rows="6"}}
+                {{#unless autoSaveMode}}
+                <div class="form-group">
+                        <button type="submit" class="btn right" disabled="{{disableButtons}}">Submit</button>
+                </div>
+                {{/unless}}
+        {{/autoForm}}
+    </div>
+  </div>
+</div>
+</template>

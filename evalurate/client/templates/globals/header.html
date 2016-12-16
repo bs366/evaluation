@@ -1,0 +1,42 @@
+<template name="header">
+	<div class="navbar-fixed">
+	<nav>
+	  <div class="nav-wrapper">
+	    <a href="/" class="brand-logo center">Evalurate</a>
+	    <ul class="right hide-on-sm-only">
+	      <!-- Dropdown Trigger -->
+					{{#unless currentUser}}
+						{{> publicNavigation}}
+					{{/unless}}
+					<div class="{{isLoggedOut}}">
+						{{> navDropdowns}}
+					</div>
+	    </ul>
+	  </div>
+	</nav>
+	</div>
+	<ul id="menu" class="dropdown-content">
+		<li><a href="{{pathFor 'rootChooser'}}">Change Organization</a></li>
+		<li><a>Option Two</a></li>
+		<li class="divider"></li>
+		<li><a href="/logout" class="logout">Logout</a></li>
+	</ul>
+	<ul id="notifications" class="dropdown-content">
+		<li><a href="http://localhost:3000/evaluation/32tX5EpQ9KqeiFLXW">Capstone - Spring 2016<br>Design Review Two</a></li>
+		<!-- <li><a href="#!"></a></li> -->
+	</ul>
+	{{#if currentUser}}
+		<div class="deep-orange" style="height: 15vh"></div>
+	{{/if}}
+</template>
+
+<template name="navDropdowns">
+	<li><a class="dropdown-button" data-beloworigin="true" data-constrainwidth="false" data-activates="notifications">Notifications <span class="new badge">1</span></a></li>
+	<li><a class="dropdown-button" data-beloworigin="true" data-activates="menu"><div class="row">
+		<span><img src="{{currentUser.profile.avatar}}" alt="" class="responsive-img circle" height="32px" width="32px">
+			{{currentUser.profile.firstName}} {{currentUser.profile.lastName}}<i class="material-icons right">
+				arrow_drop_down
+			</i></span></div>
+		</a>
+	</li>
+</template>

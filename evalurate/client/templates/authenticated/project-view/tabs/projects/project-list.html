@@ -1,0 +1,30 @@
+<template name="projectList">
+  {{#if Template.subscriptionsReady }}
+    {{#if containsProjects}}
+    <ul class="collection">
+        {{# each containsProjects}}
+        <li class="collection-item">
+            <a href="#" class="expand-project-info" id="{{_id}}">{{name}}</a>
+            <a href="{{pathFor 'evalResults'}}/{{_id}}" class="secondary-content" >View Results</a>
+            <br><span>Due: {{prettyDate closeDate}}</span>
+        </li>
+        <li hidden class="project-info" id="{{_id}}">
+          <div class="grey">
+            {{>evalList projId=_id}}
+          </div>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+      <p>There are no projects yet.</p>
+      <hr>
+    {{/if}}
+   	<div class="fixed-action-btn bottom-add-btn">
+        <a class="btn-floating btn-large waves-effect waves-light">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+  {{else}}
+    {{> loading}}
+  {{/if}}
+</template>

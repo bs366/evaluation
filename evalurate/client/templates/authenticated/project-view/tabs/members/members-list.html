@@ -1,0 +1,46 @@
+<template name="membersList">
+    {{#if members}}
+    <h3>Team Members</h3> {{else}}
+    <p>There are no members yet</p>
+    {{/if}}
+    <ul class="collection">
+        {{#each members}}
+        <li class="collection-item avatar">
+            {{#with profileById this}}
+            <img src="{{profile.avatar}}" alt="" class="circle">
+            <span class="title">
+                <a href="#" id="{{_id}}">
+                        {{profile.firstName}} {{profile.lastName}}
+                </a>
+            </span>
+            <i class="dropdown-button material-icons right" data-beloworigin="true" data-constrainwidth="false" data-alignment="right" data-activates='dropdown1'>more_vert</i>
+            <!-- <p>First Line
+                            <br> Second Line
+                        </p> -->
+            {{/with}}
+        </li>
+        {{/each}}
+    </ul>
+    <div class="fixed-action-btn bottom-add-btn">
+        <a class="btn-floating btn-large waves-effect waves-light add-member">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+</template>
+
+<template name="allMembersList">
+  <ul class="collection">
+    {{#each members}}
+    <a href="#" class="collection-item avatar select-member" id="{{_id}}">
+        <img src="{{profile.avatar}}" alt="" class="circle">
+        <span class="title">
+            {{profile.firstName}} {{profile.lastName}}
+        </span>
+        <p> {{profile.jobTitle}}</p>
+        <a href="#" class="secondary-content add-group-member" id="{{_id}}"><i class="material-icons">add</i></a>
+    </a>
+    {{/each}}
+  </ul>
+  <a class="btn btn-large waves-effect waves-light" id="add-group-members">Add Selected</a>
+  {{> inviteUser}}
+</template>

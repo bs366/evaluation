@@ -1,0 +1,22 @@
+<template name="profileView">
+    <div class="row profile-view-modal">
+    	<div class="col s9 pull-s3 profile-modal pinned exit-modal">	</div>
+        <div class="col s3 push-s9 white pinned profile-modal z-depth-2 animate">
+        {{#if Template.subscriptionsReady}}
+                {{#with profileInfo}}
+            <div class="colored-area deep-orange center-align">
+            	<img src="{{profile.avatar}}" alt="" class="circle center-align profile-picture">
+            </div>
+            <div class="profile-text-area">
+                <h4 class="center">{{profile.firstName}} {{profile.lastName}}</h4>
+                <h5 class="center">{{profile.jobTitle}}</h5>
+                <div class="left">
+                    <p>Email: {{emailFromId _id}}</p>
+                    <p>Phone: {{profile.phone}}</p>
+                </div>
+            </div>
+            {{/with}}
+            {{/if}}
+        </div>
+    </div>
+</template>

@@ -1,0 +1,13 @@
+<template name="authenticatedNavigation">
+  <p>This will eventually be the space where projects, divisions and other stuff is listed</p>
+  <p>Icons on the left will eventually change from current to archived stuff.</p>
+  <ul class="collection">
+    <a class="collection-item {{currentRoute 'index'}}" href="{{pathFor 'index'}}">Index</a>
+    <!-- <a class="collection-item {{currentRoute 'dashboard'}}" href="{{pathFor 'dashboard'}}">Dashboard</a> -->
+    <a class="collection-item {{currentRoute 'createEvaluation'}}" href="{{pathFor 'createEvaluation'}}">Create Evaluations</a>
+  </ul>
+  <ul class="collection">
+      <a  href="#" class="collection-item dropdown-toggle">{{emailFromId currentUser._id}}</a>
+      <a class="collection-item logout" href="/logout">Logout</a>
+  </ul>
+</template>

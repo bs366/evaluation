@@ -1,0 +1,20 @@
+<template name="default">
+    {{>bertAlert}} {{> header}}
+    {{#if Template.subscriptionsReady }}
+        {{#if loggingIn }}
+          {{> loading}}
+        {{else}}
+          {{#if authenticated}}
+            {{#unless redirectAuthenticated}}
+                {{>defaultLoggedIn}}
+            {{/unless}}
+          {{else}}
+            {{#unless redirectPublic}}
+              {{> defaultLoggedOut}}
+            {{/unless}}
+          {{/if}}
+        {{/if}}
+    {{else}}
+        {{>loading}}
+    {{/if}}
+</template>

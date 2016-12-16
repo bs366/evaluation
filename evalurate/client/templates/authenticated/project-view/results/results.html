@@ -1,0 +1,61 @@
+<template name="evalResults">
+    <div class="container white z-depth-2 inner-padding">
+    {{#if Template.subscriptionsReady}}
+      <h3 class="center">{{#with project}}{{name}}{{/with}}</h3>
+          <table class="bordered highlight">
+            <thead>
+              <tr>
+                <th></th>
+                {{#each evaluations}}
+                  <th>
+                    <b>{{evalTempName templateId}} - {{ prettyDate dueDate }}</b>
+                    <div class="progress orange lighten-4">
+                     <div class="determinate" style="width: {{percentComplete (numResponses _id) totalResponses}}"></div>
+                   </div>
+                 </th>
+                {{/each}}
+              </tr>
+            </thead>
+            <tbody>
+            {{#each teams}}
+              <tr class="deep-orange white-text">
+                <td><b>{{name}}</b></td>
+                {{#each evaluations}}
+                  <td class="white-text">{{numTeamResponses _id ../_id}}/{{totalTeamResponses ../_id}}</td>
+                {{/each}}
+              </tr>
+              <!--ul class="collapsible" data-collapsible="accordion"-->
+              {{#each members}}
+                <tr class="expand-member-scores" id="{{this}}{{../_id}}">
+                  <td>
+                    {{#with nameFromId this}}{{firstName}} {{lastName}}{{/with}}
+                  </td>
+                    {{#each evaluations}}
+                      <td>
+                        {{getScore .. ../../_id _id}}
+                      </td>
+                    {{/each}}
+                  </tr>
+                    {{#each ../members}}
+                      <tr hidden class="hidden-scores grey lighten-2" id="{{..}}{{../../_id}}">
+                        <td>
+                          <div class="light italic">
+                          {{#with nameFromId this}}{{firstName}} {{lastName}}{{/with}}
+                          </div>
+                        </td>
+                        {{#each evaluations}}
+                          <td>
+                            {{getIndividualScore .. ../.. ../../../_id _id}}
+                          </td>
+                        {{/each}}
+                      </tr>
+                    {{/each}}
+            {{/each}}
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      {{>loading}}
+    {{/if}}
+  </div>
+</template>

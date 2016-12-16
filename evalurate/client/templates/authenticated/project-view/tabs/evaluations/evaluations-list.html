@@ -1,0 +1,68 @@
+<template name="evalList">
+	{{#if Template.subscriptionsReady}}
+		<ul class="collection">
+			{{#each evals}}
+				<li class="collection-item grey lighten-2">
+					{{#with evalTitle templateId}}
+						{{title}} -
+					{{/with}}
+					{{prettyDate dueDate}}
+					<div class="secondary-content">
+						{{percentComplete (numResponses _id) totalResponses}}
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+		{{> loading}}
+	{{/if}}
+	<div class="right-align">
+		<button class="btn add-evaluation">Create New Evaluation</button>
+	</div>
+</template>
+
+<template name="evalListForMembers">
+	{{#if Template.subscriptionsReady}}
+		{{#if pendingEvals}}
+		<h5>Pending</h5>
+		<ul class="collection">
+			{{#each pendingEvals}}
+				<a href="{{pathFor 'singleEval'}}/{{../projId}}/{{_id}}" class="collection-item">
+					{{#with evalTitle templateId}}
+						{{title}} -
+					{{/with}}
+					{{prettyDate dueDate}}
+				</a>
+			{{/each}}
+		</ul>
+		{{/if}}
+		{{#if completedEvals}}
+		<h5>Completed</h5>
+		<ul class="collection">
+			{{#each completedEvals}}
+				<li class="collection-item">
+					{{#with evalTitle templateId}}
+						{{title}} -
+					{{/with}}
+					{{prettyDate dueDate}}
+				</li>
+			{{/each}}
+		</ul>
+		{{/if}}
+	{{else}}
+		{{> loading}}
+	{{/if}}
+</template>
+
+<template name="evalTemplateList">
+	<!-- {{> quickForm id="createEval" type="insert" collection="Evaluations" omitFields="owner"}}-->
+	{{#if Template.subscriptionsReady}}
+		{{#autoForm id="createEval" type="insert" collection="Evaluations"}}
+			{{> afQuickField name="templateId"}}
+			{{> afQuickField name='dueDate'}}
+			<button class="btn" type="submit">Submit</button>
+		{{/autoForm}}
+	{{else}}
+		{{>loading}}
+	{{/if}}
+</template>

@@ -1,0 +1,33 @@
+<template name="createEvaluation">
+    {{> createSurvey}}
+    <!-- {{> evaluations}} -->
+</template>
+
+<template name="createSurvey">
+  <div class="row ">
+    <div class="col m6 offset-m3 white z-depth-1" style="margin-top: 15px">{{>quickForm collection="EvalTemplates" type="insert" id="evaluation_insert"}}</div>
+  </div>
+
+</template>
+
+<template name="evaluations">
+  {{#if Template.subscriptionsReady}}
+    <div class="container white z-depth-2 inner-padding" style="margin-top: -10vh">
+        {{#with evaluation "\0"}} ​
+          <h2>{{evalTemp.title}}</h2>
+        {{/with}}
+        {{#each evalTeams}}
+        <h4>{{teamName}}</h4>
+          {{#with evaluation teamId}}
+              {{>evaluationAutoForm}}
+          {{/with}}
+        {{/each}}
+    </div>
+  {{else}}
+    {{>loading}}
+  {{/if}}
+</template>
+
+<template name="evaluationAutoForm">
+    {{> quickForm schema=schema id=uniqueEvalId type="insert" collection="ResponsesTemp"}}
+</template>

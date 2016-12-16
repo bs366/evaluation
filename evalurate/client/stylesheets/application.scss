@@ -1,0 +1,61 @@
+@import "tools/extends";
+
+@import "objects/forms";
+
+@import "components/login";
+@import "components/left-side-nav";
+@import "components/misc";
+@import "components/splash";
+
+@import "{poetic:materialize-scss}/sass/components/_color.scss";
+//Change Color Examples
+// http://materializecss.com/sass.html
+$primary-color: color("deep-orange", "base") !default;
+$secondary-color: color("deep-orange", "lighten-1") !default;
+//$link-color: color("red", "darken-1") !default;
+
+@import "{poetic:materialize-scss}/sass/materialize.scss";
+
+body{
+	background-color: #ECF0F1;
+}
+
+.profile-view-modal{
+	position: absolute;
+	top: 0;
+	visibility: hidden;
+	opacity: 0;
+	min-height: 100vh;
+	min-width: 100vw;
+	margin: 0;
+	z-index: 1000;
+}
+
+.profile-modal{
+	padding: 0 !important;
+	position: absolute;
+	top: 0;
+	min-height: 100vh;
+	z-index: 99999;
+	.colored-area{
+		min-height: 100px;
+	}
+	.profile-text-area{
+		padding: 15px;
+		padding-top: 50px;
+	}
+	.profile-picture{
+		transform: translate(0, 50%);
+		max-height: 128px;
+		max-width: 128px;
+	}
+}
+
+.profile-view-modal{
+	background-color: rgba(0, 0, 0, .1);
+}
+
+.logged-out{
+	visibility: hidden;
+	opacity: 0;
+}

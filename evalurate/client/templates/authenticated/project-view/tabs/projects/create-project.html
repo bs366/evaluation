@@ -1,0 +1,131 @@
+<template name="createProject">
+<style>
+img {
+max-width: 250px;
+height: 50px;
+}
+</style>
+<div class="container">
+    <div class="card-panel deep-orange z-depth-1">
+        <h3 id="myModalLabel" class="center white-text">Create Project in {{currentDivision.name}}</h3>
+    </div>
+    {{#autoForm collection="Projects" id="insertProjectForm" type="insert"}}
+    <div class="row">
+        <div class="col s6">{{>afQuickField name="name"}}</div>
+        <div class="col s3">{{>afQuickField name="openDate"}}</div>
+        <div class="col s3">{{>afQuickField name="closeDate"}}</div>
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    {{> afQuickField name="description" rows=6}}
+                    <!--i class="material-icons prefix">mode_edit</i>
+                    <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                    <label for="icon_prefix2">Description</label-->
+                </div>
+            </div>
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th data-field="id">Members</th>
+                <th data-field="name">Groups</th>
+                <th data-field="price">Team Members</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="col s4">
+                        <ul class="collection">
+                            {{#each members}}
+                            <a href="#" class="collection-item avatar select-member" id="{{_id}}">
+                                <img src="{{profile.avatar}}" alt="" class="circle">
+                                <span class="title">
+                                    {{profile.firstName}} {{profile.lastName}}
+                                </span>
+                                <p> {{profile.jobTitle}}</p>
+                                <a href="#" class="secondary-content add-team-member" id="{{_id}}"><i class="material-icons">forward</i></a>
+                            </a>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <a class="btn-floating btn-large waves-effect waves-light" id="clear-member-selection"><i class="material-icons">clear</i></a>
+                    <a class="btn-floating btn-large waves-effect waves-light" id="member-shuffle"><i class="material-icons">shuffle</i></a>
+                    <a class="btn-floating btn-large waves-effect waves-light" id="add-team-members"><i class="material-icons">forward</i></a>
+                </td>
+                <td>
+                    <div class="col s6">
+                        <ul class="collection">
+                            {{#each groupOptions}}
+                            <a href="#" class="collection-item select-team" id="{{_id}}">
+                                <span class="title">
+                                    {{name}}
+                                </span>
+                                <a href="#" class="secondary-content remove-team" id="{{_id}}"><i class="material-icons">clear</i></a>
+                            </a>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    {{> addTeamForm}}
+                </td>
+                <td>
+                    <div class="col s6">
+                        <ul class="collection">
+                            {{#if currentTeamMembers}}
+                            {{#each currentTeamMembers}}
+                            <li class="collection-item avatar" id="{{_id}}">
+                                <img src="{{profile.avatar}}" alt="" class="circle">
+                                <span class="title">
+                                    {{profile.firstName}} {{profile.lastName}}
+                                </span>
+                                <p> {{profile.jobTitle}}</p>
+                                <a href="#" class="secondary-content remove-team-member" id="{{_id}}"><i class="material-icons">clear</i></a>
+                            </li>
+                            {{/each}}
+                            {{else}}
+                            <li class="collection-item" id="{{_id}}">
+                                <span class="title">
+                                    No Members To Show
+                                </span>
+                            </li>
+                            {{/if}}
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="form-group">
+            <button type="submit" class="btn right" disabled="{{disableButtons}}">Submit</button>
+        </div>
+    </div>
+    {{/autoForm}}
+</div>
+</template>
+
+<template name="addTeamForm">
+<form id="add-team-form">
+    <div class="row col s6">
+        <div class="input-field">
+            <input value="Team {{teamNum}}" id="new-team" type="text" name="name" class="validate">
+            <label class="active" for="new-team">New Team</label>
+        </div>
+        <div class="input-field">
+            <button type="submit" class="btn waves-effect waves-light"><i class="material-icons">add</i></button>
+        </div>
+        <!-- Dropdown Trigger -->
+        <div class="input-field">
+            <a href="#" class="dropdown-button btn" id="subgroups-chooser" data-beloworigin="true" data-activates="permanent-team-dropdown">
+              Sub Groups<i class="material-icons right">arrow_drop_down</i></a>
+        </div>
+    </div>
+</form>
+<!-- Dropdown Structure -->
+<ul id='permanent-team-dropdown' class='dropdown-content'>
+    {{#each permanentGroups}}
+    <li><a href="#" class="add-permanent-team" id="{{value}}">{{label}}</a></li>
+    {{/each}}
+</ul>
+</template>

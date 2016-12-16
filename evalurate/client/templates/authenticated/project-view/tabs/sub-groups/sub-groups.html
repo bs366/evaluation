@@ -1,0 +1,21 @@
+<template name="unitSettings">
+    {{#if children}}
+    	<h3>Sub Groups</h3>
+ 	{{else}}
+    	<p>There are no sub groups</p>
+	{{/if}}
+    <ul class="collection collection-with-add">
+   	{{#each permaChildren _id}}
+            <li class="collection-item">
+        	   <a href="{{pathFor 'adminUnit'}}/{{_id}}"><b>{{name}}</b></a>
+            </li>
+    {{/each}}
+    </ul>
+    <h3>Permissions</h3>
+    {{>unitPermissionSettings}}
+    <div class="fixed-action-btn bottom-add-btn">
+        <a class="btn-floating btn-large waves-effect waves-light">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+</template>

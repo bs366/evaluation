@@ -1,0 +1,14 @@
+<template name="projectsSidebar">
+	{{#if Template.subscriptionsReady}}
+		{{#with myProjects}}
+		<h5>Assigned Projects</h5>
+		<ul class="collection no-border">
+				{{#each projects}}
+					<a class="collection-item {{isActive _id}}" href="{{pathFor 'projectView'}}/{{this._id}}">{{name}}</a>
+				{{/each}}
+			</ul>
+		{{/with}}
+	{{else}}
+			{{>loading}}
+	{{/if}}
+</template>

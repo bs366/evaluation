@@ -1,0 +1,51 @@
+<template name="defaultLoggedIn">
+    {{#if Template.subscriptionsReady}}
+        {{#if checkRoutes}}
+        <div class="row" style="margin-top: -10vh">
+          {{>Template.dynamic template=mainContent}}
+        </div>
+        {{else}}
+          {{#if forceCompleteProfile}}
+            <div class="row" style="margin-top: -10vh">
+              {{>Template.dynamic template=mainContent}}
+            </div>
+          {{else}}
+          {{#if chooseOrg}}
+          <div class="row" style="margin-top: -10vh">
+            {{>Template.dynamic template=mainContent}}
+          </div>
+          {{else}}
+              <div class="row" style="margin-top: -10vh">
+                  <div class="col s4 offset-s1 left-side-nav white pinned z-depth-2">
+                      <div class="row">
+                          <div class="col s2 nav-divider center left-nav-icons">
+                              <br>
+                              <a href="{{pathFor 'projects'}}" class="icon-link {{currentRoute 'projects'}}"><i class="small material-icons">query_builder</i></a>
+                              <hr>
+                              <!--a href="{{pathFor 'dashboard'}}" class="icon-link {{currentRoute 'dashboard'}}"><i class="small material-icons">snooze</i></a-->
+                              {{#if isAdmin}}
+                              <a href="{{pathFor 'admin'}}" class="icon-link {{currentRoute 'admin'}}"><i class="small material-icons">vpn_key</i></a>
+                              <!--hr>
+                              <a href="#" class="icon-link manage-people"><i class="small material-icons">people</i></a-->
+                              <hr>
+                              {{/if}}
+                          </div>
+                          <div class="col s10">
+                              {{> Template.dynamic template=sidebar}}
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col s6 push-s5 white z-depth-2" style="margin: 0 0.75rem">
+                      <!-- <div class="animate-this"> -->
+                          {{> Template.dynamic template=mainContent}}
+                      <!-- </div> -->
+                  </div>
+              </div>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+        {{> profileView}}
+    {{else}}
+        {{>loading}}
+    {{/if}}
+</template>

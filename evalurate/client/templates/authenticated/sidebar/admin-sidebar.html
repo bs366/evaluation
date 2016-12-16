@@ -1,0 +1,25 @@
+<template name="adminSidebar">
+	{{#if Template.subscriptionsReady}}
+	{{#with unitFromId currentRootId}}
+		<h4><a href="{{pathFor 'adminUnit'}}/{{_id}}" class="deep-orange-text">{{name}}</a></h4>
+	{{/with}}
+	{{#with childUnits currentRootId}}
+	<ul class="collection no-border">
+		{{>recursiveChildUnits childUnit=childUnit padding=20}}
+	</ul>
+	{{/with}}
+	{{else}}
+		{{>loading}}
+	{{/if}}
+</template>
+
+<template name="recursiveChildUnits">
+	{{#each childUnit}}
+		{{#unless temp}}
+			<a class="collection-item {{isActive _id}}" href="{{pathFor 'adminUnit'}}/{{_id}}" style="padding-left: {{../padding}}px">{{name}}</a>
+			{{#with childUnits _id}}
+				{{>recursiveChildUnits childUnit=childUnit padding=(addPadding ../../padding)}}
+			{{/with}}
+		{{/unless}}
+	{{/each}}
+</template>

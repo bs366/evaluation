@@ -1,0 +1,18 @@
+.left-side-nav{
+	box-shadow: 2px 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+	min-height: calc(100vh - 85px);
+	z-index: 997;
+	.row{
+		min-height: calc(100vh - 85px);
+		margin-bottom: 0;
+	}
+	.nav-divider{
+		display: inline-block;
+		border-right: 1px solid #d5d5d5;
+		min-height: calc(100vh - 85px);
+	}
+}
+
+nav{
+	box-shadow: none !important;
+}
